@@ -1,18 +1,18 @@
-import firebase_admin
-from firebase_admin import credentials
 from firebase_admin import firestore
+import firebase_initializer
 
-# initializations
-cred = credentials.Certificate('credentials.json')
-firebase_admin.initialize_app(cred)
+# Initialize Firebase
+firebase_initializer.initialize()
+
+# firestore client
 db = firestore.client()
 
 # adding data
 doc_ref = db.collection('python').document()
 doc_ref.set({
-    'fname': 'Jeremiah',
-    'lname': 'Polo',
-    'age': 24
+    'name': 'Python 3.0',
+    'code': '3.0',
+    'year_launched': 2012
 
 })
 
@@ -22,5 +22,3 @@ docs = py_ref.stream()
 
 for doc in docs:
     print('{} => {} '.format(doc.id, doc.to_dict()))
-
-
